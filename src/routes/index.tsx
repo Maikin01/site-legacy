@@ -14,8 +14,6 @@ import {
   WandSparkles,
   Zap,
 } from 'lucide-react';
-import { LegacyFaq } from '@/components/legacy-faq';
-import { ScrollReveal } from '@/components/scroll-reveal';
 
 export const Route = createFileRoute('/')({
   head: () => ({

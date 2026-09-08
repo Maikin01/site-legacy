@@ -749,10 +749,10 @@ main > section:not(.hero)::after {
   display: grid;
   width: min(1206px, calc(100% - 80px));
   min-height: 710px;
-  grid-template-columns: 320px 235px 165px 1fr;
+  grid-template-columns: 320px repeat(3, minmax(0, 1fr));
   align-items: start;
-  column-gap: 55px;
-  padding: 54px 100px 52px;
+  column-gap: 44px;
+  padding: 54px 70px 52px;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid #2c2c2c;
@@ -844,8 +844,8 @@ main > section:not(.hero)::after {
   letter-spacing: -0.015em;
 }
 
-.reasons-card article:last-child h3 { width: 255px; }
-.reasons-card article:last-child p { width: 190px; }
+.reasons-card article:last-child h3,
+.reasons-card article:last-child p { width: auto; }
 
 /* NICHOS */
 .niches.section-shell {

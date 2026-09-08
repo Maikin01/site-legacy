@@ -341,7 +341,7 @@ function Home() {
       <section className="faq section-shell" id="faq">
         <h2 className="section-title">FAQ — PERGUNTAS ESSENCIAIS</h2>
         <p className="faq-subtitle">Tire suas principais dúvidas sobre a Legacy Community.</p>
-        <div className="faq-wrap"><LegacyFaq /></div>
+        <p className="faq-subtitle">Em breve.</p>
       </section>
 
       <footer>

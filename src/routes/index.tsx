@@ -151,7 +151,6 @@ function ProductMockup() {
 function Home() {
   return (
     <main>
-      <ScrollReveal />
       <section className="hero" id="inicio">
         <div className="hero-art">
           <img

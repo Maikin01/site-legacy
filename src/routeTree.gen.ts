@@ -10,53 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ObrigadoRouteImport } from './routes/obrigado'
-import { Route as TermosRouteImport } from './routes/termos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ObrigadoRoute = ObrigadoRouteImport.update({
-  id: '/obrigado',
-  path: '/obrigado',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermosRoute = TermosRouteImport.update({
-  id: '/termos',
-  path: '/termos',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/obrigado': typeof ObrigadoRoute
-  '/termos': typeof TermosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/obrigado': typeof ObrigadoRoute
-  '/termos': typeof TermosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/obrigado': typeof ObrigadoRoute
-  '/termos': typeof TermosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/obrigado' | '/termos'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/obrigado' | '/termos'
-  id: '__root__' | '/' | '/obrigado' | '/termos'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ObrigadoRoute: typeof ObrigadoRoute
-  TermosRoute: typeof TermosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,27 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/obrigado': {
-      id: '/obrigado'
-      path: '/obrigado'
-      fullPath: '/obrigado'
-      preLoaderRoute: typeof ObrigadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/termos': {
-      id: '/termos'
-      path: '/termos'
-      fullPath: '/termos'
-      preLoaderRoute: typeof TermosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ObrigadoRoute: ObrigadoRoute,
-  TermosRoute: TermosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

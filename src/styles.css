@@ -1336,6 +1336,15 @@ main > section:not(.hero)::after {
   100% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -5)); }
 }
 
+@keyframes proof-stop-and-go-mobile {
+  0%, 19.31% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -2)); }
+  20%, 39.31% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -3)); }
+  40%, 59.31% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -4)); }
+  60%, 79.31% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -5)); }
+  80%, 99.31% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -6)); }
+  100% { transform: translateX(calc((var(--proof-card) + var(--proof-gap)) * -7)); }
+}
+
 /* OFERTA */
 .offer { padding: 30px 0 150px; }
 .offer-grid { display: grid; grid-template-columns: minmax(0, 560px); justify-content: center; }
@@ -1824,6 +1833,7 @@ footer {
   .proof-viewport:active { cursor: grabbing; }
   .proof-viewport:active .proof-track { animation-play-state: paused; }
   .proof-track {
+    animation-name: proof-stop-and-go-mobile;
     padding-inline: calc((100vw - var(--proof-card)) / 2);
     touch-action: pan-x;
   }

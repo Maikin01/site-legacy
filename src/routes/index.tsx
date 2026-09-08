@@ -14,8 +14,6 @@ import {
   WandSparkles,
   Zap,
 } from 'lucide-react';
-import { LegacyFaq } from '@/components/legacy-faq';
-import { ScrollReveal } from '@/components/scroll-reveal';
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -153,7 +151,6 @@ function ProductMockup() {
 function Home() {
   return (
     <main>
-      <ScrollReveal />
       <section className="hero" id="inicio">
         <div className="hero-art">
           <img
@@ -344,7 +341,7 @@ function Home() {
       <section className="faq section-shell" id="faq">
         <h2 className="section-title">FAQ — PERGUNTAS ESSENCIAIS</h2>
         <p className="faq-subtitle">Tire suas principais dúvidas sobre a Legacy Community.</p>
-        <div className="faq-wrap"><LegacyFaq /></div>
+        <p className="faq-subtitle">Em breve.</p>
       </section>
 
       <footer>

@@ -1,24 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-function IndexComponent() {
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-4xl font-bold tracking-tight">Olá!</h1>
-      <p className="mt-4 text-lg text-muted">O projeto está pronto para começar.</p>
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 text-center">
+      <h1 className="text-3xl font-bold">Olá!</h1>
+      <p className="mt-2 opacity-80">Projeto reiniciado. Adicione suas páginas aqui.</p>
     </main>
   );
 }
-
-export const Route = createFileRoute("/")({
-  component: IndexComponent,
-  head: () => ({
-    meta: [
-      { title: "Início" },
-      { name: "description", content: "Página inicial do projeto." },
-      { property: "og:title", content: "Início" },
-      { property: "og:description", content: "Página inicial do projeto." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-  }),
-});

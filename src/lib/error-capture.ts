@@ -1,24 +1,20 @@
-let lastCapturedError: { error: unknown; at: number } | undefined;
-const TTL_MS = 5_000;
+let lastCapturedError: Error | undefined;
 
-function record(error: unknown) {
-  lastCapturedError = { error, at: Date.now() };
+export function captureError(error: unknown) {
+  lastCapturedError = error instanceof Error ? error : new Error(String(error));
 }
 
-if (typeof globalThis.addEventListener === "function") {
-  globalThis.addEventListener("error", (event) => record((event as ErrorEvent).error ?? event));
-  globalThis.addEventListener("unhandledrejection", (event) =>
-    record((event as PromiseRejectionEvent).reason),
-  );
-}
-
-export function consumeLastCapturedError(): unknown {
-  if (!lastCapturedError) return undefined;
-  if (Date.now() - lastCapturedError.at > TTL_MS) {
-    lastCapturedError = undefined;
-    return undefined;
-  }
-  const { error } = lastCapturedError;
+export function consumeLastCapturedError(): Error | undefined {
+  const error = lastCapturedError;
   lastCapturedError = undefined;
   return error;
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("error", (event) => {
+    captureError(event.error);
+  });
+  window.addEventListener("unhandledrejection", (event) => {
+    captureError(event.reason);
+  });
 }

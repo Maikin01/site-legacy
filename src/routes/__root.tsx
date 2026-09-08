@@ -13,12 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 const criticalAboveTheFoldCss = `
-html,body{margin:0;min-width:320px;background:#000;color:#fff}
-body{overflow-x:hidden}
-main{position:relative;overflow:hidden;background:#000}
-.hero{position:relative;display:flex;min-height:auto;flex-direction:column;align-items:center;overflow:hidden;padding:0 0 120px;background:transparent}
-.hero-art{position:relative;width:min(1400px,100vw);margin:0 auto}
-.hero-art img{display:block;width:100%;height:auto}
+:root{--red:#f00}*{box-sizing:border-box}html,body{margin:0;min-width:320px;background:#000;color:#fff}body{overflow-x:hidden;font-family:'Urbanist',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}main{position:relative;overflow:hidden;background:#000}.css-loading main>section:not(.hero),.css-loading main>footer{display:none}.hero{position:relative;display:flex;min-height:auto;flex-direction:column;align-items:center;overflow:hidden;padding:0 0 120px;background:transparent}.hero-art{position:relative;width:min(1400px,100vw);margin:0 auto}.hero-art:after{position:absolute;right:0;bottom:0;left:0;height:25%;background:linear-gradient(to bottom,transparent,#000 88%);content:''}.hero-art img{display:block;width:100%;height:auto}.hero-intro{position:relative;z-index:2;display:flex;width:min(940px,calc(100% - 40px));flex-direction:column;align-items:center;margin:clamp(-220px,-14vw,-80px) auto 0;text-align:center}.hero-kicker{margin:0 0 26px;color:var(--red);font-size:.82rem;font-weight:600;letter-spacing:.42em}.hero-intro h1{max-width:920px;margin:0;color:#f7f7f7;font-size:clamp(2.15rem,4.2vw,4.35rem);font-weight:800;line-height:1.08;letter-spacing:-.04em}.hero-intro>p:not(.hero-kicker){margin:34px 0 0;color:#d0d0d0;font-size:clamp(1.08rem,1.7vw,1.5rem);line-height:1.36}.hero-intro__button{display:inline-flex;min-width:260px;min-height:62px;align-items:center;justify-content:center;gap:10px;margin-top:42px;padding:0 34px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:linear-gradient(105deg,#a80000,#f00 88%);color:#fff;font-size:1.08rem;font-weight:800;text-decoration:none}@media(max-width:760px){.hero{padding-bottom:92px}.hero-art{width:100vw}.hero-intro{width:calc(100% - 40px);margin-top:-82px}.hero-kicker{margin-bottom:22px;font-size:.65rem;letter-spacing:.36em}.hero-intro h1{font-size:clamp(1.75rem,6vw,2.5rem);line-height:1.12}.hero-intro>p:not(.hero-kicker){margin-top:25px;font-size:1rem}.hero-intro__button{min-width:230px;margin-top:32px}}
 `;
 
 function NotFoundComponent() {
@@ -114,10 +109,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className="dark">
+    <html lang="pt-BR" className="dark css-loading" suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: criticalAboveTheFoldCss }} />
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('css-loading')" }} />
       </head>
       <body>
         {children}

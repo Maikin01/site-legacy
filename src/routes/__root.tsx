@@ -12,6 +12,15 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const criticalAboveTheFoldCss = `
+html,body{margin:0;min-width:320px;background:#000;color:#fff}
+body{overflow-x:hidden}
+main{position:relative;overflow:hidden;background:#000}
+.hero{position:relative;display:flex;min-height:auto;flex-direction:column;align-items:center;overflow:hidden;padding:0 0 120px;background:transparent}
+.hero-art{position:relative;width:min(1400px,100vw);margin:0 auto}
+.hero-art img{display:block;width:100%;height:auto}
+`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -87,6 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "icon", href: "/legacy-logo.webp" },
+      { rel: "preload", href: "/legacy-hero.webp", as: "image", type: "image/webp" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap" },
@@ -106,6 +116,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className="dark">
       <head>
+        <style dangerouslySetInnerHTML={{ __html: criticalAboveTheFoldCss }} />
         <HeadContent />
       </head>
       <body>

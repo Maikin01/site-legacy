@@ -88,7 +88,7 @@ main::after {
 main > section,
 main > footer {
   z-index: 1;
-  background-color: #000000;
+  background-color: transparent;
 }
 
 main > section:not(.hero) {
@@ -425,7 +425,7 @@ main > section:not(.hero)::after {
   min-height: 760px;
   overflow: hidden;
   padding: 100px 7.8vw 80px;
-  background: #000000;
+  background: transparent;
 }
 
 .hero::before,
@@ -626,7 +626,7 @@ main > section:not(.hero)::after {
   flex-direction: column;
   align-items: center;
   padding: 0 0 120px;
-  background: #000000;
+  background: transparent;
 }
 
 .hero-art {
@@ -740,7 +740,7 @@ main > section:not(.hero)::after {
   width: 100%;
   margin: 0 auto;
   padding: 56px 0 84px;
-  background: #000000;
+  background: transparent;
 }
 
 .reasons-card {
@@ -1809,8 +1809,29 @@ footer {
   .bonus-step__copy h3 { font-size: 1.72rem; }
   .testimonials.section-shell { width: 100%; }
   .proof-heading { padding: 0 22px; font-size: clamp(2.2rem, 11vw, 3.3rem); }
-  .proof-viewport { --proof-card: min(74vw, 300px); --proof-gap: 13px; }
-  .proof-shot { border-radius: 15px; }
+  .proof-viewport {
+    --proof-card: min(calc(100vw - 48px), 340px);
+    --proof-gap: 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: calc((100vw - var(--proof-card)) / 2);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+  }
+  .proof-viewport::-webkit-scrollbar { display: none; }
+  .proof-viewport:active { cursor: grabbing; }
+  .proof-viewport:active .proof-track { animation-play-state: paused; }
+  .proof-track {
+    padding-inline: calc((100vw - var(--proof-card)) / 2);
+    touch-action: pan-x;
+  }
+  .proof-shot {
+    border-radius: 15px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
   .offer-grid { grid-template-columns: 1fr; gap: 55px; }
   .faq > .section-title { font-size: 1.75rem; }
 }

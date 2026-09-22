@@ -1156,6 +1156,87 @@ main > section:not(.hero) > * {
 .faq-item[open] .faq-summary i { transform: rotate(180deg); }
 .faq-item p { margin: 0; padding: 12px 30px 34px; color: #8f8f8f; font-size: 0.92rem; line-height: 1.6; }
 
+/* RETENÇÃO DE SAÍDA */
+.exit-intent {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(72px, 9vw, 120px) 24px;
+  background: #000;
+  scroll-margin-top: 0;
+}
+
+.exit-intent__content {
+  display: flex;
+  width: min(100%, 1040px);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.exit-intent h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(4.6rem, 8vw, 7.4rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+}
+
+.exit-intent__subtitle {
+  margin: 24px 0 0;
+  color: #fff;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.exit-intent__mascot {
+  display: block;
+  width: min(600px, 72vw);
+  height: auto;
+  margin: 22px auto 4px;
+  object-fit: contain;
+}
+
+.exit-intent__quote {
+  max-width: 980px;
+  margin: 0;
+  color: #f0f0f0;
+  font-size: clamp(1rem, 1.45vw, 1.3rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.exit-intent__support {
+  max-width: 940px;
+  margin: 2px 0 0;
+  color: #fff;
+  font-size: clamp(1rem, 1.4vw, 1.22rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.exit-intent__button {
+  display: inline-flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 0 34px;
+  border-radius: 18px;
+  background: linear-gradient(100deg, #38de0f, #1d6e2d);
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 800;
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.15);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.exit-intent__button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.exit-intent__button svg { width: 22px; height: 22px; stroke-width: 2.4; }
+
 footer {
   position: relative;
   width: 100%;
@@ -1673,6 +1754,13 @@ footer {
   .price-card h2 { font-size: 1.75rem; }
   .offer-lead { font-size: 0.84rem; }
   .price-card li { min-height: 43px; padding: 10px 11px; font-size: 0.72rem; }
+  .exit-intent { min-height: 100svh; padding: 64px 18px 72px; }
+  .exit-intent h2 { font-size: clamp(3.6rem, 18vw, 5rem); }
+  .exit-intent__subtitle { margin-top: 18px; font-size: 1.2rem; }
+  .exit-intent__mascot { width: min(440px, 106vw); margin-top: 18px; }
+  .exit-intent__quote { font-size: 0.95rem; line-height: 1.45; }
+  .exit-intent__support { margin-top: 5px; font-size: 0.96rem; }
+  .exit-intent__button { width: 100%; min-height: 60px; padding: 0 18px; border-radius: 16px; font-size: 1.05rem; }
   footer { width: 100%; padding: 28px 18px 32px; }
 }
 

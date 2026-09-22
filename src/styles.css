@@ -1196,6 +1196,8 @@ main > section:not(.hero) > * {
   width: min(600px, 72vw);
   height: auto;
   margin: 22px auto 4px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.88) 86%, rgba(0, 0, 0, 0.38) 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.88) 86%, rgba(0, 0, 0, 0.38) 94%, transparent 100%);
   object-fit: contain;
 }
 

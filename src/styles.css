@@ -1590,15 +1590,15 @@ footer {
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     cursor: grab;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
   }
   .proof-viewport::-webkit-scrollbar { display: none; }
-  .proof-viewport:active { cursor: grabbing; }
-  .proof-viewport:active .proof-track { animation-play-state: paused; }
+  .proof-viewport.is-dragging { cursor: grabbing; }
+  .proof-viewport.is-dragging .proof-track { animation-play-state: paused; }
   .proof-track {
     animation-name: proof-stop-and-go-mobile;
     padding-inline: calc((100vw - var(--proof-card)) / 2);
-    touch-action: pan-x;
   }
   .proof-shot {
     border-radius: 15px;

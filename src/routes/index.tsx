@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { useRef } from 'react';
 import {
   ArrowRight,
   Check,
@@ -151,6 +152,55 @@ function ProductMockup() {
 }
 
 function Home() {
+  const proofViewportRef = useRef<HTMLDivElement>(null);
+  const proofDragRef = useRef({ active: false, horizontal: false, startX: 0, startY: 0, scrollLeft: 0 });
+
+  const endProofDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = proofViewportRef.current;
+    if (viewport?.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+    viewport?.classList.remove('is-dragging');
+    proofDragRef.current.active = false;
+    proofDragRef.current.horizontal = false;
+  };
+
+  const startProofDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    const viewport = proofViewportRef.current;
+    if (!viewport) return;
+
+    proofDragRef.current = {
+      active: true,
+      horizontal: false,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: viewport.scrollLeft,
+    };
+  };
+
+  const moveProofDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = proofViewportRef.current;
+    const drag = proofDragRef.current;
+    if (!viewport || !drag.active) return;
+
+    const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
+
+    if (!drag.horizontal) {
+      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 8) {
+        drag.active = false;
+        return;
+      }
+      if (Math.abs(deltaX) <= 8) return;
+
+      drag.horizontal = true;
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-dragging');
+    }
+
+    event.preventDefault();
+    viewport.scrollLeft = drag.scrollLeft - deltaX;
+  };
+
   return (
     <main>
       <ScrollReveal />
@@ -293,7 +343,15 @@ function Home() {
 
       <section className="testimonials section-shell" id="depoimentos">
         <h2 className="proof-heading">O que quem já acessou tá falando da Legacy 👀</h2>
-        <div className="proof-viewport viewport-animation" aria-label="Depoimentos reais de membros da Legacy">
+        <div
+          ref={proofViewportRef}
+          className="proof-viewport viewport-animation"
+          aria-label="Depoimentos reais de membros da Legacy"
+          onPointerDown={startProofDrag}
+          onPointerMove={moveProofDrag}
+          onPointerUp={endProofDrag}
+          onPointerCancel={endProofDrag}
+        >
           <div className="proof-track">
             {[0, 1].map((copy) => (
               <div className="proof-group" aria-hidden={copy === 1} key={`proof-group-${copy}`}>

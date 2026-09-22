@@ -9,13 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermosRouteImport } from './routes/termos'
-import { Route as ObrigadoRouteImport } from './routes/obrigado'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EsperaRouteImport } from './routes/espera'
+import { Route as ObrigadoRouteImport } from './routes/obrigado'
+import { Route as TermosRouteImport } from './routes/termos'
 
-const TermosRoute = TermosRouteImport.update({
-  id: '/termos',
-  path: '/termos',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsperaRoute = EsperaRouteImport.update({
+  id: '/espera',
+  path: '/espera',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ObrigadoRoute = ObrigadoRouteImport.update({
@@ -23,49 +29,60 @@ const ObrigadoRoute = ObrigadoRouteImport.update({
   path: '/obrigado',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/espera': typeof EsperaRoute
   '/obrigado': typeof ObrigadoRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/espera': typeof EsperaRoute
   '/obrigado': typeof ObrigadoRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/espera': typeof EsperaRoute
   '/obrigado': typeof ObrigadoRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/obrigado' | '/termos'
+  fullPaths: '/' | '/espera' | '/obrigado' | '/termos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/obrigado' | '/termos'
-  id: '__root__' | '/' | '/obrigado' | '/termos'
+  to: '/' | '/espera' | '/obrigado' | '/termos'
+  id: '__root__' | '/' | '/espera' | '/obrigado' | '/termos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EsperaRoute: typeof EsperaRoute
   ObrigadoRoute: typeof ObrigadoRoute
   TermosRoute: typeof TermosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/termos': {
-      id: '/termos'
-      path: '/termos'
-      fullPath: '/termos'
-      preLoaderRoute: typeof TermosRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/espera': {
+      id: '/espera'
+      path: '/espera'
+      fullPath: '/espera'
+      preLoaderRoute: typeof EsperaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/obrigado': {
@@ -75,11 +92,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ObrigadoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EsperaRoute: EsperaRoute,
   ObrigadoRoute: ObrigadoRoute,
   TermosRoute: TermosRoute,
 }
